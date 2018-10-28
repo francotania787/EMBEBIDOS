@@ -1,0 +1,109 @@
+/*
+ *     UNIVERSIDAD TECNICA DEL NORTE
+ *           FICA - CIERCOM
+ *           OPTATIVA II
+ *           
+ *    Nombre: Tania Franco
+ *    Fecha: 29/10/2019
+ *    
+ *  TEMA: CALCULADORA MATRICIAL
+ */
+#include <Keypad.h> // Incluimos libreria de teclado
+#include <LiquidCrystal.h> // incluimos libreria LCD
+
+LiquidCrystal lcd(13, 12, 11, 10, 9, 8);// pines LCD (RS E d4 d5 d6 d7)
+
+const byte columnas = 4; // alcance variables
+const byte filas = 4; // alcance variables
+char teclas [filas] [columnas] = {  
+  {'7', '8', '9', '/'},
+  {'4', '5', '6', '*'},
+  {'1', '2', '3', '-'},
+  {'X', '0', '=', '+'}};
+byte pin_fil[filas] = {7, 6, 5,4}; //Pines de entrada filas
+byte pin_col[columnas] = {3, 2, 1, 0}; //Pines de entrada columnas
+
+Keypad teclado = Keypad( makeKeymap(teclas), pin_fil, pin_col, filas, columnas );
+int posicion;
+char tecla;
+char operacion;
+boolean Valor_actual = false;
+boolean siguiente = false;
+boolean final = false;
+String numero1, numero2, numero3;
+int total;
+int largo_numero;
+
+void setup() {
+  lcd.begin(16, 2);
+  lcd.clear();
+}
+
+void loop() {
+  // ingreso de primer numero
+  tecla = teclado.getKey();
+  if (tecla != NO_KEY && (tecla=='1'||tecla =='2'||tecla=='3'||tecla=='4'||tecla=='5'||tecla=='6'||tecla=='7'||tecla=='8'||tecla=='9'||tecla=='0')) {
+    if (Valor_actual != true) {
+      numero1 = numero1 + tecla;
+      largo_numero = numero1.length();
+      posicion = largo_numero;
+      lcd.setCursor(0, 0);
+      lcd.print(numero1);
+    }
+    else {
+      numero2 = numero2 + tecla;
+      largo_numero = numero2.length();
+      lcd.setCursor(posicion + 1, 0);
+      lcd.print(numero2);
+      final = true;
+    }
+  }
+     // indica la operacion que se va a realizar ( DIVISION, MULTIPLICACION, RESTA, SUMA)
+  if (Valor_actual == false && tecla != NO_KEY && (tecla == '/' || tecla == '*' || tecla == '-' || tecla == '+')) {
+    if (Valor_actual == false) {
+      Valor_actual = true;
+      operacion = tecla;
+      lcd.setCursor(posicion, 0);
+      lcd.print(operacion);
+    }
+  }
+     // ejecuta las sentencias segun la operacion que se desee
+  if (final == true && tecla != NO_KEY && tecla == '=') {
+    if (operacion == '+') {
+      total = numero1.toInt() + numero2.toInt();
+    }
+    if (operacion == '-') {
+      total = numero1.toInt() - numero2.toInt();
+    }
+    if (operacion == '*') {
+      total = numero1.toInt() * numero2.toInt();
+    }
+    if (operacion == '/') {
+      if (numero2.toInt() == 0) {
+        total = ' ';
+      } else {
+        total = numero1.toInt() / numero2.toInt();
+      }
+    } 
+    // imprime el resultado
+    numero3 = String(total);
+    lcd.setCursor(8, 1);
+    lcd.print('=');
+   if (numero3.length() > 5) {
+   lcd.setCursor(3, 1);
+   lcd.print("syntax error"); 
+   } else {
+      lcd.print(total);
+    }
+  }
+  // limpia todo de la LCD 
+  if (tecla != NO_KEY && tecla == 'X') {
+    lcd.clear();
+    Valor_actual = false;
+    final = false;
+    numero1 = "";
+    numero2 = "";
+    total = 0;
+    operacion = ' ';
+  }
+}
