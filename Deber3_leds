@@ -1,0 +1,47 @@
+#include <LiquidCrystal.h> // libreria LCD
+/*
+ *         UNIVERSIDAD TECNICA EL NORTE
+ *               FICA - CIERCOM
+ *                OPTATIVA II
+ *    Nombre:Tania Franco
+ *    Fecha: 29 de octubre de 2018
+ */
+int led1=13;
+int led2=12;
+int led3=11;
+String texto;
+LiquidCrystal lcd (7,6,5,4,3,2);// RE, E, D4, D6, D6, D7
+void setup() {
+  lcd.begin(16,2);
+  pinMode(led1, OUTPUT);
+  pinMode (led2, OUTPUT);
+  pinMode(led3, OUTPUT);
+}
+void loop() {
+  texto = "SISTEMA ON 20S";// texto 20s sistema prendido.
+  lcd.print(texto);
+  delay(20000);
+  lcd.clear();
+ texto = "20s-led1-ON"; // texto lcd 20s de encendido se prende el led 1.
+ lcd.print(texto);// imprimimos el texto
+  digitalWrite(led1, HIGH);
+  digitalWrite(led2, LOW);
+  digitalWrite(led3, LOW);
+delay (1000); // tiempo que durara encendido led 1.
+lcd.clear();// limpiamos pantalla
+texto = "25s-led2-ON";// texto lcd 25s de encendido se prende el led 2.
+lcd.print(texto);// imprimimos texto
+  digitalWrite(led1, LOW);
+  digitalWrite(led2, HIGH);
+  digitalWrite(led3, LOW);
+  delay(15000);// tiempo que dura prendido led2.
+  lcd.clear();// limpiamos pantalla
+ texto = "30s-led3-ON";
+  lcd.print(texto); 
+  digitalWrite(led1, LOW);
+  digitalWrite(led2, LOW);
+  digitalWrite(led3, HIGH);
+  delay(5000); // tiempo que dura encendido led3.
+  digitalWrite(led3, LOW);
+  lcd.clear();// limpiamos pantalla
+}
