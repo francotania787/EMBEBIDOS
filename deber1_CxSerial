@@ -1,0 +1,31 @@
+/*
+ *   UNIVERSIDAD TECNICA DEL NORTE
+ *         FICA - CIERCOM
+ *         OPTATIVA II
+ *   Nombre: Tania Franco
+ *   Fecha: 29 e octubre de 2018
+ *   
+ */
+#include <LiquidCrystal.h> // libreria LCD
+LiquidCrystal lcd (13,12,11,10,9,8);// RE, E, D4, D6, D6, D7 // DEFINIMOS LOS PINES 
+char caracter;   //variable para almacenar caracter por caracter 
+String cadena; // variable para juntar todos los datos
+String a;// variable donde se almacenara la palabra
+void setup() {
+lcd.begin(16,2); 
+Serial.begin(9600);
+}
+void loop() {
+
+ if(Serial.available()>0){// condicion para saber que hay datos
+    delay (500);// t para que llegue la palabra
+    lcd.clear(); // borramos para ver la siguiente palabra
+ while (Serial.available()>0){ // bucle para juntar los caracteres
+  caracter= Serial.read(); // lee los caracteres y guarda en CARACTER
+  cadena+=caracter;
+    }
+a= lcd.print(cadena);// imprimimos la palabra
+caracter = '\0'; //Regresamos a 0 la variable caracter
+cadena = "\0" ; // regresamos a 0 La variable cadena
+}
+}
