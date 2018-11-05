@@ -1,0 +1,208 @@
+/*
+ *       Universidad tecnica del Norte
+ *              FICA - CIERCOM
+ *                 OPTATIVA II
+ *    Nombre:Tania Franco
+ *    Fecha: 4 de noviembre de 2018
+ * intrucciones:
+ *    1.- encontrar el promedio de cada fila
+ *    2.- encontrar el  promedio de cada columna
+ *    3.- encuentre el numero mas alto de cada columna
+ *    4.- encuentre el numero mas bajo de cada columna
+ *    5.- encuentre el nuero mas alto de toda la matriz
+ *    6.- encuentre el numero mas bajo de toda la matriz
+ */
+ // numero de filas y columnas de la matriz
+ const int filas =10;
+ const int columnas=4;
+int matriz_datos[filas][columnas]={ {3,5,-6,7},
+                                    {3,8,6,17},
+                                    {2,-4,4,27}, 
+                                    {2,4,8,10},
+                                    {2,4,-2,5}, 
+                                    {4,5,6,7 },
+                                    {5,-8,6,-7}, 
+                                    {1,5,16,8}, 
+                                    {0,5,12,7}, 
+                                    {4,5,16,7}};
+
+ 
+ int cmin, cmax;
+ int mmax; 
+
+
+void setup() {
+  Serial.begin(9600); //Inicio el monitor serial a 9600 baudios
+}
+void loop() { 
+ instruccion1(); 
+delay(1000);  
+instruccion2();
+delay(1000);
+  instruccion3();
+ delay(5000);
+ // instruccion4();
+ // delay(15000);
+  instruccion5();
+  delay(5000);
+  instruccion6();
+  delay(5000);  
+}
+              // ***PROMEDIO COLUMNASS***
+void instruccion1() {
+  Serial.println("    ***PROMEDIO COLUMNAS***"); 
+  for(int i=0;i<filas;i++){ //registro de cada fila
+    int sumac=0; //para que el numero sumado no se sume de nuevo a si mismo
+      for(int j=0;j<columnas;j++){ //registro de los numeros en las columnas
+        sumac += matriz_datos[i][j];//se sumas los valores de las filas
+          
+        }
+      Serial.print("Promedio columnas ");
+      Serial.print(i+1);// se calcule en cada una de las filas
+      Serial.print(":    ");
+      Serial.println(sumac/columnas); // se divide para el nuMero de columnas
+    } 
+}
+              // ***PROMEDIO FILAS***
+void instruccion2(){
+  Serial.println("***PROMEDIO FILAS***"); 
+    
+  for(int j=0;j<columnas;j++){ //registro de cada fila
+    int sumac=0; //para que el numero sumado no se sume de nuevo a si mismo
+      for(int i=0;i<filas;i++){ //registro de los numeros en las columnas
+        sumac += matriz_datos[i][j];//se sumas los valores de las filas
+          
+        }
+      Serial.print("Promedio filas ");
+      Serial.print(j+1);// se calcule en cada una de las filas
+      Serial.print(":    ");
+      Serial.println(sumac/filas); // se divide para el nuero de filas
+    } 
+
+  
+} 
+                        // ***NUMERO MAS ALTO DE CADA COLUMNA***
+void instruccion3(){
+  
+   Serial.println("***NUMERO MAS ALTO DE CADA COLUMNA***");
+   for(int j=0;j<columnas;j++){ //for para leer la primera columna
+     if(matriz_datos[0][j] > cmax){ //compracion con variable mayor 
+       cmax=matriz_datos[0][j]; //se asigna la variable mayor 
+      }
+     }
+     Serial.print("primera columna: ");
+     Serial.println(cmax); //imprime variable mayor
+   cmax=0;
+    for(int j=0;j<columnas;j++){ 
+     if(matriz_datos[1][j] > cmax){
+      cmax=matriz_datos[1][j]; 
+      }
+     }
+     Serial.print("segunda columna: ");
+     Serial.println(cmax);
+   cmax=0;
+    for(int j=0;j<columnas;j++){ 
+     if(matriz_datos[2][j] > cmax){  
+       cmax=matriz_datos[2][j]; 
+      }
+     }
+     Serial.print("tercera columna: ");
+     Serial.println(cmax);
+   cmax=0;
+     for(int j=0;j<columnas;j++){ 
+     if(matriz_datos[3][j] > cmax){ 
+       cmax=matriz_datos[3][j];
+      }
+     }
+     Serial.print("cuarta columna: ");
+     Serial.println(cmax);
+   cmax=0; 
+     for(int j=0;j<columnas;j++){ 
+     if(matriz_datos[4][j] > cmax){ 
+       cmax=matriz_datos[4][j]; 
+      }
+     }
+     Serial.print("quinta columna: ");
+     Serial.println(cmax);
+  cmax=0;
+      for(int j=0;j<columnas;j++){ 
+     if(matriz_datos[5][j] > cmax){  
+       cmax=matriz_datos[5][j]; 
+      }
+     }
+     Serial.print("sexta columna: ");
+     Serial.println(cmax);
+   cmax=0;
+      for(int j=0;j<columnas;j++){ 
+     if(matriz_datos[6][j] > cmax){ 
+       cmax=matriz_datos[6][j]; 
+      }
+     }
+     Serial.print("septima columna: ");
+     Serial.println(cmax);
+ cmax=0;
+     for(int j=0;j<columnas;j++){ 
+     if(matriz_datos[7][j] > cmax){ 
+       cmax=matriz_datos[7][j]; 
+      }
+     }
+     Serial.print("octava columna: ");
+     Serial.println(cmax);
+   cmax=0;   
+     for(int j=0;j<columnas;j++){ 
+     if(matriz_datos[8][j] > cmax){  
+       cmax=matriz_datos[8][j]; 
+      }
+     }
+     Serial.print("novena columna: ");
+     Serial.println(cmax);
+   cmax=0;   
+     for(int j=0;j<columnas;j++){ 
+     if(matriz_datos[9][j] > cmax){ 
+      cmax=matriz_datos[9][j]; 
+      }
+     }
+     Serial.print("decima columna: ");
+     Serial.println(cmax);
+ }
+                  // ***NUMERO MAS BAJO DE CADA COLUMNA***
+void instruccion4(){
+  
+  Serial.println("  ***NUMERO MAS BAJO DE CADA COLUMNA***  ");
+    for(int j=-10;j<columnas;j++){ //for para leer la primera columna
+     if(matriz_datos[0][j] < cmin){ //comparacion con variable mayor 
+       cmin=matriz_datos[0][j]; //se asigna la variable mayor
+      }
+     }
+     Serial.print("primera columna: ");
+     Serial.println(cmin); //imprime variable mayor, gracias al if de compraciones y al for que la contiene compara cada numero de la primera fila y determina el mas grande
+   cmin=-10;
+  
+                  // ***NUMERO  MAS ALTO DE TODA LA MATRIZ****
+void instruccion5(){
+   Serial.println("***NUMERO  MAS ALTO DE TODA LA MATRIZ**");
+   int mayor=0;
+   for(int i=0; i<10; i++){ 
+   for(int j=0; j<4; j++){
+      if(matriz_datos[i][j]>mayor){
+      mayor=matriz_datos[i][j]; 
+      } 
+     }
+   }
+  Serial.print("numero mayor: ");
+  Serial.println(mayor);
+}
+                // ***NUMERO MAS BAJO DE LA MARIZ ***
+void instruccion6(){
+  Serial.println("       ***NUMERO MAS BAJO DE LA MARIZ***");
+    int menor=0;
+   for(int i=0; i<10; i++){ // for para las filas
+   for(int j=0; j<4; j++){ // for para las columnas
+      if(matriz_datos[i][j]<menor){ // comparacion 
+      menor=matriz_datos[i][j]; // se guarda en la variable menor la comparacion
+      } 
+     }
+   }
+  Serial.print("numero menor: ");
+  Serial.println(menor);
+}
