@@ -1,0 +1,40 @@
+#include"datos_entrenamiento.h"
+#include"datos_test.h"
+int col=0;
+int row=0;
+float distancia1, distancia2, distancia3;
+float dist_menor1=1000;
+float dist_menor2=1000;
+float dist_menor3=1000;
+void setup() {
+  // put your setup code here, to run once:
+ Serial.begin(9600);
+}
+
+void loop() {
+
+  for(;row<120;row++){ // contador de filas (for lento)
+       distancia2= sqrt( pow((matriz[row][0]-prueba[50][0]),2)+
+                        pow((matriz[row][1]-prueba[50][1]),2)+
+                        pow((matriz[row][2]-prueba[50][2]),2)+
+                        pow((matriz[row][3]-prueba[50][3]),2));
+      if(distancia1<dist_menor1){ 
+       dist_menor1=distancia1;   
+      }
+
+  for(;row<120;row++){ // contador de filas (for lento)
+       distancia2= sqrt( pow((matriz[row][0]-prueba[50][0]),2)+
+                        pow((matriz[row][1]-prueba[50][1]),2)+
+                        pow((matriz[row][2]-prueba[50][2]),2)+
+                        pow((matriz[row][3]-prueba[50][3]),2));
+      if(distancia2<dist_menor2){ 
+       dist_menor2=distancia2;   
+       Serial.println(matriz[row][4]);
+      }             
+      
+  }
+ 
+     
+      
+  }} 
+  
