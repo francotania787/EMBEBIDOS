@@ -1,0 +1,53 @@
+#include"datos_entrenamiento.h"
+#include"datos_test.h"
+int r[50];
+int p[50];
+int col = 0;
+int row = 0;
+float distancia;
+float dist_menor = 1000;
+
+int test= 60;
+int resp = 0;
+int r1=0;
+int r2=0;
+int r3=0;
+int i;
+int test_contador;
+       
+void setup() {
+  Serial.begin(9600);
+}
+void loop() {
+
+  }
+
+void kn(int k) {                                                                 
+  for (; row < 120; row++) { // contador de filas (for lento)
+    distancia = sqrt( pow((matriz[row][0] - prueba[test][0]), 2) +
+                      pow((matriz[row][1] - prueba[test][1]), 2) +
+                      pow((matriz[row][2] - prueba[test][2]), 2) +
+                      pow((matriz[row][3] - prueba[test][3]), 2));
+    if (distancia < dist_menor) {
+
+      dist_menor = distancia;
+      Serial.println(dist_menor);
+      test_contador = matriz[row][4];
+      Serial.println(test_contador);
+
+
+      r[resp] = distancia;
+      p[resp] = matriz[row][4];
+      resp++;
+      Serial.println("VALORES");
+      Serial.println(resp);
+
+    }
+  }
+
+  for (i = (resp - 1); i >= (resp - k); i--) {                 
+    Serial.println("VALORES CERCANOS");
+    Serial.println(i);
+   
+    }
+}
